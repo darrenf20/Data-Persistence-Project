@@ -123,7 +123,7 @@ public class DataManager : MonoBehaviour
         highScoresText.text = "-High Scores-\n";
         for (int i = 0; i < maxHighScores; i++)
         {
-            if (!highScoreNames[i].Equals("") && highScoreNames[i] != null)
+            if (highScoreNames[i] != null && !highScoreNames[i].Equals(""))
             {
                 highScoresText.text += highScoreNames[i] + " : " + highScoreValues[i] + "\n";
             }

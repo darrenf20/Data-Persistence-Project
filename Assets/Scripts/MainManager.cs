@@ -79,7 +79,7 @@ public class MainManager : MonoBehaviour
     }
     void UpdateBestScore()
     {
-        if (!dataManager.highScoreNames[0].Equals(""))
+        if (dataManager.highScoreNames[0] != null && !dataManager.highScoreNames[0].Equals(""))
         {
             string bestName = dataManager.highScoreNames[0];
             int bestValue = dataManager.highScoreValues[0];
