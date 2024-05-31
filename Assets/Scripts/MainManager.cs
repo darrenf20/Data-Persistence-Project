@@ -13,6 +13,7 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text bestScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -27,6 +28,9 @@ public class MainManager : MonoBehaviour
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
 
         ScoreText.text = dataManager.playerName + " Score : 0";
+
+        bestScoreText = GameObject.Find("Best Score Text").GetComponent<Text>();
+        UpdateBestScore();
 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
@@ -73,11 +77,21 @@ public class MainManager : MonoBehaviour
         m_Points += point;
         ScoreText.text = dataManager.playerName + " " + $"Score : {m_Points}";
     }
+    void UpdateBestScore()
+    {
+        if (!dataManager.highScoreNames[0].Equals(""))
+        {
+            string bestName = dataManager.highScoreNames[0];
+            int bestValue = dataManager.highScoreValues[0];
+            bestScoreText.text = "Best Score : " + bestName + " - " + bestValue;
+        }
+    }
 
     public void GameOver()
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
         dataManager.UpdateHighScores(m_Points);
+        UpdateBestScore();
     }
 }

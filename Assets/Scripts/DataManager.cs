@@ -14,7 +14,7 @@ public class DataManager : MonoBehaviour
     public string playerName;
 
     [SerializeField] TMP_Text highScoresText;
-    [SerializeField] Text bestScore;
+    public Text bestScore;
     private const int maxHighScores = 5;
     public string[] highScoreNames;
     public int[] highScoreValues;
@@ -43,14 +43,6 @@ public class DataManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(scene);
-
-        OnGameSceneLoad();
-    }
-
-    void OnGameSceneLoad()
-    {
-        bestScore = GameObject.Find("Canvas/Best Score Text").GetComponent<Text>();
-        UpdateBestScore();
     }
 
 
@@ -82,19 +74,12 @@ public class DataManager : MonoBehaviour
                 }
 
                 SaveHighScores();
-                UpdateBestScore();
                 break;
             }
         }
     }
 
-    void UpdateBestScore()
-    {
-        if (!highScoreNames[0].Equals(""))
-        {
-            bestScore.text = "Best Score : " + highScoreNames[0] + " - " + highScoreValues[0];
-        }
-    }
+
 
     [System.Serializable]
     class SaveData
